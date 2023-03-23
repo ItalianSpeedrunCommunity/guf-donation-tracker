@@ -27,7 +27,7 @@ __all__ = [
 ]
 
 _timezoneChoices = [(x, x) for x in pytz.common_timezones]
-_currencyChoices = (('USD', 'US Dollars'), ('CAD', 'Canadian Dollars'))
+_currencyChoices = (('USD', 'US Dollars'), ('CAD', 'Canadian Dollars'), ('EUR', 'Euro'))
 
 
 class EventManager(models.Manager):

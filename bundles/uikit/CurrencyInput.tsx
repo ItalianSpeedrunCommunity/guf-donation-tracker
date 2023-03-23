@@ -28,7 +28,7 @@ const CurrencyInput = (props: CurrencyInputProps) => {
     name,
     label,
     hint,
-    leader = '$',
+    leader = '€',
     trailer,
     marginless = false,
     className,

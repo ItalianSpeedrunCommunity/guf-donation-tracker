@@ -84,64 +84,38 @@ const Donate = (props: DonateProps) => {
 
   return (
     <Container>
+      <img src="/static/images/guf23.png" class="header-logo" />
       <ErrorAlert errors={commentErrors.__all__} />
       <Header size={Header.Sizes.H1} marginless>
-        Thank You For Your Donation
+        Grazie per la donazione!
       </Header>
-      <Text size={Text.Sizes.SIZE_16}>100% of your donation goes directly to {receiverName}.</Text>
+      <Text size={Text.Sizes.SIZE_16}>Il 100% delle donazioni vanno direttamente a {receiverName}.</Text>
 
       <section className={styles.section}>
         <ErrorAlert errors={commentErrors.requestedalias} />
         <TextInput
           name="alias"
           value={name}
-          label="Preferred Name/Alias"
-          hint="Leave blank to donate anonymously"
+          label="Nome da visualizzare/Nickname"
+          hint="Lasciare in bianco per donare anonimamente"
           size={TextInput.Sizes.LARGE}
           onChange={updateName}
           maxLength={32}
           autoFocus
         />
         <ErrorAlert errors={commentErrors.requestedemail} />
-        <TextInput
-          name="email"
-          value={email}
-          label="Email Address"
-          hint={
-            PRIVACY_POLICY_URL && (
-              <>
-                Click <Anchor href={PRIVACY_POLICY_URL}>here</Anchor> for our privacy policy
-              </>
-            )
-          }
-          size={TextInput.Sizes.LARGE}
-          type={TextInput.Types.EMAIL}
-          onChange={updateEmail}
-          maxLength={128}
-        />
 
         <ErrorAlert errors={commentErrors.requestedsolicitemail} />
-
-        <Text size={Text.Sizes.SIZE_16} marginless>
-          Do you want to receive emails from {receiverName}?
-        </Text>
-
-        <RadioGroup
-          className={styles.emailOptin}
-          options={EMAIL_OPTIONS}
-          value={wantsEmails}
-          onChange={updateWantsEmails}
-        />
 
         <ErrorAlert errors={commentErrors.amount} />
 
         <CurrencyInput
           name="amount"
           value={amount}
-          label="Amount"
+          label="Donazione"
           hint={
             <React.Fragment>
-              Minimum donation is <strong>{CurrencyUtils.asCurrency(minimumDonation)}</strong>
+              La donazione minima è di <strong>{CurrencyUtils.asCurrency(minimumDonation)}</strong>
             </React.Fragment>
           }
           size={CurrencyInput.Sizes.LARGE}
@@ -157,7 +131,7 @@ const Donate = (props: DonateProps) => {
               key={amountPreset}
               look={Button.Looks.OUTLINED}
               onClick={updateAmountPreset(amountPreset)}>
-              ${amountPreset}
+              €{amountPreset}
             </Button>
           ))}
         </div>
@@ -167,9 +141,9 @@ const Donate = (props: DonateProps) => {
         <TextInput
           name="comment"
           value={comment}
-          label="Leave a Comment?"
-          placeholder="Enter Comment Here"
-          hint="Please refrain from offensive language or hurtful remarks. All donation comments are screened and will be removed from the website if deemed unacceptable."
+          label="Vuoi lasciare un commento?"
+          placeholder="Inserisci il commento qui"
+          hint="Evitare linguaggio offensivo o scurrile. Tutti i commenti delle donazioni vengono controllati e saranno rimossi dal sito se ritenuti inaccettabili."
           multiline
           onChange={updateComment}
           maxLength={5000}
@@ -184,16 +158,15 @@ const Donate = (props: DonateProps) => {
       )}
 
       <section className={styles.section}>
-        <Header size={Header.Sizes.H3}>Incentives</Header>
+        <Header size={Header.Sizes.H3}>Incentivi</Header>
         <Text>
-          Donation incentives can be used to add bonus runs to the schedule and influence choices by runners. Would you
-          like to put your donation towards an incentive?
+          Gli incentivi possono essere usati per aggiungere run bonus alla schedule o per influenzare le scelte dei runner. Vuoi destinare la tua donazione a un incentivo? 
         </Text>
         <DonationIncentives className={styles.incentives} step={step} total={amount != null ? amount : 0} />
       </section>
 
       <section className={styles.section}>
-        <Header size={Header.Sizes.H3}>Donate!</Header>
+        <Header size={Header.Sizes.H3}>Dona!</Header>
         {!donationValidity.valid && <Text>{donationValidity.errors.map(error => error.message)}</Text>}
         <Button
           size={Button.Sizes.LARGE}
@@ -201,7 +174,7 @@ const Donate = (props: DonateProps) => {
           fullwidth
           onClick={handleSubmit}
           data-testid="donation-submit">
-          Donate {amount != null ? CurrencyUtils.asCurrency(amount) : null}
+          Dona {amount != null ? CurrencyUtils.asCurrency(amount) : null}
         </Button>
       </section>
     </Container>

@@ -1,5 +1,5 @@
 export function asCurrency(amount: string | number) {
-  return `$${Number(amount).toFixed(2)}`;
+  return `€${Number(amount).toFixed(2)}`;
 }
 
 export function parseCurrency(amount?: string) {

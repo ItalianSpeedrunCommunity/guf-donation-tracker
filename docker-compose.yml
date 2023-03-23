@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  guf_donations:
+    container_name: guf_donations
+    build:
+      dockerfile: docker/Dockerfile
+      context: .
+    init: true
+    ports:
+      - 8000:8000
+    volumes:
+      - db_data:/app/tracker_development/db
+      - static:/app/static
+    restart: unless-stopped
+    networks:
+      - nginx_fenris
+  
+volumes:
+  db_data:
+  static:
+
+networks:
+  nginx_fenris:
+    name: nginx_fenris
+    external: true

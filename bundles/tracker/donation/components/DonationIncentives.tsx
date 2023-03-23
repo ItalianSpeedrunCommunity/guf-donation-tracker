@@ -63,7 +63,7 @@ const DonationIncentives = (props: DonationIncentivesProps) => {
       {showForm ? (
         <div className={styles.incentives}>
           <div className={styles.left}>
-            <TextInput value={search} onChange={setSearch} name="filter" placeholder="Filter Incentives" marginless />
+            <TextInput value={search} onChange={setSearch} name="filter" placeholder="Filtra Incentivi" marginless />
             <div className={styles.results}>
               {searchResults.map(result => (
                 <Clickable
@@ -104,7 +104,7 @@ const DonationIncentives = (props: DonationIncentivesProps) => {
           fullwidth
           onClick={setShowFormTrue}
           data-testid="addincentives-button">
-          {bids.length > 0 ? 'Add Another Incentive' : 'Add Incentives'}
+          {bids.length > 0 ? 'Scegli un altro incentivo' : 'Scegli incentivi'}
         </Button>
       )}
     </div>

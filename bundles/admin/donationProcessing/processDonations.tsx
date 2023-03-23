@@ -155,7 +155,7 @@ export default React.memo(function ProcessDonations() {
                     {canEditDonors ? <a href={`${ADMIN_ROOT}donor/${donation.donor}`}>{donorLabel}</a> : donorLabel}
                   </td>
                   <td>
-                    <a href={`${ADMIN_ROOT}donation/${donation.pk}`}>${(+donation.amount).toFixed(2)}</a>
+                    <a href={`${ADMIN_ROOT}donation/${donation.pk}`}>&euro;{(+donation.amount).toFixed(2)}</a>
                   </td>
                   <td className={styles['comment']}>{donation.comment}</td>
                   <td>

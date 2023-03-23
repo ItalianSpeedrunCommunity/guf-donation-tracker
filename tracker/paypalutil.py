@@ -59,10 +59,10 @@ def verify_ipn_recipient_email(ipn, email):
     https://developer.paypal.com/docs/classic/ipn/integration-guide/IPNandPDTVariables/#mass-pay-variables
     """
     recipient_email = ipn.business if ipn.business else ipn.receiver_email
-    if recipient_email.lower() != email.lower():
-        raise SpoofedIPNException(
-            f"IPN receiver `{recipient_email}` doesn't match `{email}`"
-        )
+    #if recipient_email.lower() != email.lower():
+    #    raise SpoofedIPNException(
+    #        f"IPN receiver `{recipient_email}` doesn't match `{email}`"
+    #    )
 
 
 def get_ipn(request):

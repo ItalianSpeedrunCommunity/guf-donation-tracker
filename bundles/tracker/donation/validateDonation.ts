@@ -9,15 +9,15 @@ import { MAX_BIDS_PER_DONATION } from './DonationConstants';
 import { Bid, Donation, Validation } from './DonationTypes';
 
 export const DonationErrors = {
-  NO_AMOUNT: 'Donation amount is not set',
+  NO_AMOUNT: 'Totale della donazione mancante',
 
-  AMOUNT_MINIMUM: (min: number) => `Donation amount is below the allowed minimum (${CurrencyUtils.asCurrency(min)})`,
-  AMOUNT_MAXIMUM: (max: number) => `Donation amount is above the allowed maximum (${CurrencyUtils.asCurrency(max)})`,
+  AMOUNT_MINIMUM: (min: number) => `Il totale della donazione è più basso del minimo consentito (${CurrencyUtils.asCurrency(min)})`,
+  AMOUNT_MAXIMUM: (max: number) => `Il totale della donazione è più basso del massimo consentito (${CurrencyUtils.asCurrency(max)})`,
 
-  TOO_MANY_BIDS: (maxBids: number) => `Only ${maxBids} bids can be set per donation.`,
-  BID_SUM_EXCEEDS_TOTAL: 'Sum of bid amounts exceeds donation total.',
+  TOO_MANY_BIDS: (maxBids: number) => `Puoi scegliere fino a ${maxBids} incentivi per donazione.`,
+  BID_SUM_EXCEEDS_TOTAL: 'La somma degli incentivi supera il totale della donazione.',
 
-  INVALID_EMAIL: 'Email is not a valid email address',
+  INVALID_EMAIL: 'L\'indirizzo email non è valido',
 };
 
 export default function validateDonation(eventDetails: EventDetails, donation: Donation, bids: Bid[]): Validation {

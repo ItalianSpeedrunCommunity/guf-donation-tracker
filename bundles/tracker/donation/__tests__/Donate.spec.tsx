@@ -25,7 +25,7 @@ const renderDonate = (store?: ReturnType<typeof createStore>) => {
   const fillBid = (incentiveId: string, bid: { choiceId?: string; amount?: number; custom?: string }) => {
     fireEvent.click(rendered.getByTestId(`incentiveform-incentive-${incentiveId}`));
     if (bid.amount != null) {
-      fillField(/Amount to put towards incentive/i, bid.amount.toString());
+      fillField(/Totale da aggiungere all'incentivo/i, bid.amount.toString());
     }
 
     if (bid.custom != null) {

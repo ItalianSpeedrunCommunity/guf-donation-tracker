@@ -92,7 +92,7 @@ const DonationBidForm = (props: DonationBidFormProps) => {
   if (incentive == null) {
     return (
       <div className={classNames(styles.container, className)}>
-        <Text>You have {remainingDonationTotalString} remaining.</Text>
+        <Text>Ti rimangono {remainingDonationTotalString}.</Text>
       </div>
     );
   }
@@ -107,7 +107,7 @@ const DonationBidForm = (props: DonationBidFormProps) => {
         <React.Fragment>
           <ProgressBar className={styles.progressBar} progress={(incentive.amount / incentive.goal) * 100} />
           <Text marginless>
-            Current Raised Amount:{' '}
+            Totale raccolto finora:{' '}
             <span>
               {CurrencyUtils.asCurrency(incentive.amount)} / {CurrencyUtils.asCurrency(incentive.goal)}
             </span>
@@ -118,10 +118,10 @@ const DonationBidForm = (props: DonationBidFormProps) => {
       <CurrencyInput
         value={allocatedAmount}
         name="incentiveBidAmount"
-        label="Amount to put towards incentive"
+        label="Totale da aggiungere all'incentivo"
         hint={
           <React.Fragment>
-            You have <strong>{remainingDonationTotalString}</strong> remaining.
+            Ti rimangono <strong>{remainingDonationTotalString}</strong>.
           </React.Fragment>
         }
         onChange={setAllocatedAmount}
@@ -139,14 +139,14 @@ const DonationBidForm = (props: DonationBidFormProps) => {
               look={Checkbox.Looks.DENSE}
               onChange={handleNewChoice(choice.id)}>
               <Checkbox.Header>{choice.name}</Checkbox.Header>
-              <span className={styles.choiceAmount}>${choice.amount}</span>
+              <span className={styles.choiceAmount}>&euro;{choice.amount}</span>
             </Checkbox>
           ))
         : null}
 
       {incentive.custom ? (
         <Checkbox
-          label="Nominate a new option!"
+          label="Crea una nuova opzione!"
           name="incentiveBidNewOption"
           checked={customOptionSelected}
           look={Checkbox.Looks.NORMAL}
@@ -155,7 +155,7 @@ const DonationBidForm = (props: DonationBidFormProps) => {
             value={customOption}
             name="incentiveBidCustomOption"
             disabled={!customOptionSelected}
-            placeholder="Enter Option Here"
+            placeholder="Inserisci qui l'opzione"
             onChange={setCustomOption}
             maxLength={incentive.maxlength}
           />
@@ -169,7 +169,7 @@ const DonationBidForm = (props: DonationBidFormProps) => {
         fullwidth
         onClick={handleSubmitBid}
         data-testid="incentiveBidForm-submitBid">
-        Add
+        Aggiungi
       </Button>
     </div>
   );

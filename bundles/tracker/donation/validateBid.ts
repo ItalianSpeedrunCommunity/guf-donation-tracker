@@ -8,15 +8,15 @@ import { BID_MINIMUM_AMOUNT } from './DonationConstants';
 import { Bid, Donation, Validation } from './DonationTypes';
 
 export const BidErrors = {
-  NO_INCENTIVE: 'Bid must go towards an incentive',
-  NO_CHOICE: 'Bid must select a choice',
-  NO_AMOUNT: 'Bid amount is required',
+  NO_INCENTIVE: 'Devi scegliere un incentivo',
+  NO_CHOICE: 'Devi fare una scelta',
+  NO_AMOUNT: 'Devi scegliere un totale',
 
-  AMOUNT_MINIMUM: (min: number) => `Bid amount must be greater than (${CurrencyUtils.asCurrency(min)})`,
-  AMOUNT_MAXIMUM: (max: number) => `Amount is larger than remaining total (${CurrencyUtils.asCurrency(max)}).`,
+  AMOUNT_MINIMUM: (min: number) => `Il totale dev'essere maggiore di (${CurrencyUtils.asCurrency(min)})`,
+  AMOUNT_MAXIMUM: (max: number) => `Il totale scelto è troppo grande, ti rimangono (${CurrencyUtils.asCurrency(max)}).`,
 
-  NO_CUSTOM_CHOICE: 'New option does not have a value',
-  CUSTOM_CHOICE_LENGTH: (maxLength: number) => `New choice must be less than ${maxLength} characters`,
+  NO_CUSTOM_CHOICE: 'Non hai inserito una opzione',
+  CUSTOM_CHOICE_LENGTH: (maxLength: number) => `Puoi usare fine a ${maxLength} caratteri`,
 };
 
 export default function validateBid(

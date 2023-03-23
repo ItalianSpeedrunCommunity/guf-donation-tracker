@@ -24,3 +24,19 @@
 .incentives {
   margin-top: 16px;
 }
+
+body>div>div>div>div>img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-bottom: 30px;
+}
+
+nav {
+  display: none!important;
+}
+
+body>br {
+  display: none!important;
+}
