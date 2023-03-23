@@ -17,11 +17,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%^sz$q-hbzfab0-k^19lb7nej&lk*)p3$ey=y+kyxs!n_zv&mh'
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-PAYPAL_TEST = False
+DEBUG = os.environ['DJANGO_DEBUG'] == 'True'
+PAYPAL_TEST = os.environ['PAYPAL_TEST'] == 'True'
 ALLOWED_HOSTS = ['*']
 
 DOMAIN = 'production'
@@ -83,8 +83,12 @@ WSGI_APPLICATION = 'tracker_development.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db/db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ['MYSQL_DATABASE'],
+        'USER': os.environ['MYSQL_USER'],
+        'PASSWORD': os.environ['MYSQL_PASSWORD'],
+        'HOST': os.environ['MYSQL_HOST'],
+        'PORT': os.environ['MYSQL_PORT'],
     }
 }
 

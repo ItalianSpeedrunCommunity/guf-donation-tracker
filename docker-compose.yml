@@ -13,9 +13,11 @@ services:
       - db_data:/app/tracker_development/db
       - static:/app/static
     restart: unless-stopped
+    env_file:
+      - .env
     networks:
       - nginx_fenris
-  
+
 volumes:
   db_data:
   static:
