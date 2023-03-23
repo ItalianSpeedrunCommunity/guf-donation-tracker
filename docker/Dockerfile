@@ -19,7 +19,7 @@ RUN yarn build
 FROM python:3.7
 
 WORKDIR /app
-RUN pip install django~=2.2 django-extensions tzdata mysqlclient
+RUN pip install "django>=3.2,<4.2" django-extensions tzdata mysqlclient
 RUN django-admin startproject tracker_development
 
 WORKDIR /app/tracker_development/donation-tracker
