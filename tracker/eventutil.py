@@ -25,7 +25,7 @@ def post_donation_to_postbacks(donation):
         'amount': float(donation.amount),
         'donor__visibility': donation.donor.visibility,
         'donor__visiblename': donation.donor.visible_name(),
-        'new_total': float(total),
+        'new_total': float(0 if total is None else total),
         'domain': donation.domain,
     }
 

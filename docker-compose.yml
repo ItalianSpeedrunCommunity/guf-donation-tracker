@@ -11,7 +11,7 @@ services:
       - 8000:8000
     volumes:
       - db_data:/app/tracker_development/db
-      - static:/app/static
+      - donation-tracker_static:/app/static
     restart: unless-stopped
     env_file:
       - .env
@@ -20,7 +20,8 @@ services:
 
 volumes:
   db_data:
-  static:
+  donation-tracker_static:
+    external: true
 
 networks:
   nginx_fenris:
