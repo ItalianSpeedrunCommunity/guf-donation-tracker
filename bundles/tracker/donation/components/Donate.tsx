@@ -84,7 +84,7 @@ const Donate = (props: DonateProps) => {
 
   return (
     <Container>
-      <img src="/static/images/guf23.png" class="header-logo" />
+      <img src="https://donations-static.italianspeedruncommunity.com/static/images/guf23.png" class="header-logo" />
       <ErrorAlert errors={commentErrors.__all__} />
       <Header size={Header.Sizes.H1} marginless>
         Grazie per la donazione!
