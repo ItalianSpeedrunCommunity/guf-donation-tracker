@@ -16,7 +16,7 @@ COPY bundles bundles
 RUN yarn build
 
 
-FROM python:3.7
+FROM python:3.7 as final
 
 WORKDIR /app
 RUN pip install "django>=3.2,<4.2" django-extensions tzdata mysqlclient
@@ -34,14 +34,14 @@ COPY tracker tracker
 COPY --from=client /app/tracker tracker
 RUN pip install -e .
 
-WORKDIR /app/tracker_development
-COPY docker/tracker_development /app/tracker_development/tracker_development
-RUN mkdir db
-
 RUN apt update
 RUN apt install -y locales
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 RUN locale-gen en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
+FROM final
+WORKDIR /app/tracker_development
+COPY docker/tracker_development /app/tracker_development/tracker_development
+# RUN mkdir db
 CMD ["sh", "-c", "python manage.py migrate && python manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:8000"]
