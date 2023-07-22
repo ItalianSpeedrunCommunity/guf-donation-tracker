@@ -16,14 +16,26 @@ services:
     env_file:
       - .env
     networks:
-      - nginx_fenris
+      - guf_tracker_dev
+    depends_on:
+      - db
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: guf_tracker
+      MARIADB_DATABASE: guf_tracker
+      MARIADB_USER: guf_tracker
+      MARIADB_PASSWORD: guf_tracker
+    networks:
+      - guf_tracker_dev
+    volumes:
+      - ./mariadb:/var/lib/mysql
 
 volumes:
   db_data:
   donation-tracker_static:
-    external: true
 
 networks:
-  nginx_fenris:
-    name: nginx_fenris
-    external: true
+  guf_tracker_dev:
+    name: guf_tracker_dev

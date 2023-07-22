@@ -13,3 +13,4 @@ geckodriver.log
 yarn-error.log
 test-results
 .env
+mariadb
