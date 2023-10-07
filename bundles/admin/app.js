@@ -160,20 +160,16 @@ function App() {
                 </>
               )}
               <DropdownMenu name="Schedule Editor" path="schedule_editor" />
-              &mdash;
-              <DropdownMenu name="Interstitials" path="interstitials" />
-              {canChangeDonations &&
-                (<>&mdash;
-                  <DropdownMenu name="Read Donations" path="read_donations" />
-                </>)
-                /*(
+              {/*&mdash;
+              <DropdownMenu name="Interstitials" path="interstitials" />*/}
+              {canChangeDonations && (
                 <>
-                  &mdash;
-                  <DropdownMenu name="Process Donations" path="process_donations" />
+                  {/*&mdash;
+                  <DropdownMenu name="Process Donations" path="process_donations" />*/}
                   &mdash;
                   <DropdownMenu name="Read Donations" path="read_donations" />
                 </>
-              )*/}
+              )}
               {canSeeHiddenBids && (
                 <>
                   &mdash;
@@ -187,27 +183,27 @@ function App() {
               <Switch>
                 <Route path={`${match.url}/schedule_editor/`} exact component={EventMenu('Schedule Editor')} />
                 <Route path={`${match.url}/schedule_editor/:event`} component={ScheduleEditor} />
-                <Route path={`${match.url}/interstitials/:event`} component={Interstitials} />
+                {/*<Route path={`${match.url}/interstitials/:event`} component={Interstitials} />*/}
                 {canChangeDonations && (
                   <Route path={`${match.url}/read_donations/`} exact component={EventMenu('Read Donations')} />
                 )}
                 {canChangeDonations && <Route path={`${match.url}/read_donations/:event`} component={ReadDonations} />}
-                {canChangeDonations && (
+                {/*canChangeDonations && (
                   <Route path={`${match.url}/process_donations/`} exact component={EventMenu('Process Donations')} />
-                )}
-                {canChangeDonations && (
+                )*/}
+                {/*canChangeDonations && (
                   <Route path={`${match.url}/process_donations/:event`} component={ProcessDonations} />
-                )}
-                {canSeeHiddenBids && (
+                )*/}
+                {/*canSeeHiddenBids && (
                   <Route
                     path={`${match.url}/process_pending_bids/`}
                     exact
                     component={EventMenu('Process Pending Bids')}
                   />
-                )}
-                {canSeeHiddenBids && (
+                )*/}
+                {/*canSeeHiddenBids && (
                   <Route path={`${match.url}/process_pending_bids/:event`} component={ProcessPendingBids} />
-                )}
+                )*/}
               </Switch>
             </div>
           </Spinner>

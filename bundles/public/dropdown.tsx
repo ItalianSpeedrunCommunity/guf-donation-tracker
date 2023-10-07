@@ -40,9 +40,9 @@ export default function Dropdown({
     }
   }, [toggle]);
   return (
-    <span style={{ position: 'relative' }}>
+    <span style={{ position: 'relative' }} onClick={toggleOpen}>
       {label}
-      <img alt="toggle" src={STATIC_URL + (isOpen ? openFile : closedFile)} onClick={toggleOpen} />
+      <img alt="toggle" src={STATIC_URL + (isOpen ? openFile : closedFile)} />
       {isOpen ? <div onClick={closeOnClick ? toggleOpen : undefined}>{children}</div> : null}
     </span>
   );
