@@ -76,6 +76,18 @@ export default React.memo(function ReadDonations() {
     },
     [dispatch, eventId],
   );
+
+  const fetchAll = useCallback(
+    (e?: React.MouseEvent<HTMLButtonElement>) => {
+      fetchBids();
+      fetchDonations();
+      fetchDonationBids();
+
+      e?.preventDefault();
+    },
+    [dispatch, eventId],
+  )
+
   useFetchDonors(eventId);
   useEffect(() => {
     fetchBids();
@@ -150,7 +162,7 @@ export default React.memo(function ReadDonations() {
   return (
     <div>
       <h3>{event?.name}</h3>
-      <button onClick={fetchDonations}>Refresh</button>
+      <button onClick={fetchAll}>Refresh</button>
       <Spinner spinning={status.donation === 'loading'}>
         <table className="table table-condensed table-striped small">
           <tbody>
