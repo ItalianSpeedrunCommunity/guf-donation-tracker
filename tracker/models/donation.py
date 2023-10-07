@@ -86,7 +86,7 @@ class Donation(models.Model):
         'Read State',
         max_length=255,
         db_index=True,
-        default='PENDING',
+        default='READY',
         choices=(
             ('PENDING', 'Pending'),
             ('READY', 'Ready to Read'),
