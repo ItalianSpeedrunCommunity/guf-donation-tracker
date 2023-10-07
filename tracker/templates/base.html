@@ -44,27 +44,27 @@
                       <li><a class="navbar-brand" href="/"><img src="{{ settings.TRACKER_LOGO }}" style="height: 100%" alt="Logo"></a></li>
                     {% endif %}
                     {% if event.short %}
-                        <li><a href="{% url 'tracker:index' event=event.short %}">{% trans "Home" %}</a></li>
+                        <!--<li><a href="{% url 'tracker:index' event=event.short %}">{% trans "Home" %}</a></li>-->
                         <li><a href="{% url 'tracker:runindex' event=event.short %}">{% trans "Runs" %}</a></li>
-                        {% if settings.SWEEPSTAKES_URL %}
+                        <!--{% if settings.SWEEPSTAKES_URL %}
                             <li><a href="{% url 'tracker:prizeindex' event=event.short %}">{% trans "Prizes" %}</a></li>
-                        {% endif %}
+                        {% endif %}-->
                         <li><a href="{% url 'tracker:bidindex' event=event.short %}">{% trans "Bids" %}</a></li>
-                        <li><a href="{% url 'tracker:milestoneindex' event=event.short %}">{% trans "Milestones" %}</a></li>
+                        <!--<li><a href="{% url 'tracker:milestoneindex' event=event.short %}">{% trans "Milestones" %}</a></li>
                         <li><a href="{% url 'tracker:donorindex' event=event.short %}">{% trans "Donors" %}</a></li>
-                        <li><a href="{% url 'tracker:donationindex' event=event.short %}">{% trans "Donations" %}</a></li>
+                        <li><a href="{% url 'tracker:donationindex' event=event.short %}">{% trans "Donations" %}</a></li>-->
                     {% else %}
                         <li><a href="{% url 'tracker:index_all' %}">{% trans "Home" %}</a></li>
                         <li><a href="{% url 'tracker:runindex' %}">{% trans "Runs" %}</a></li>
-                        {% if settings.SWEEPSTAKES_URL %}
+                        <!--{% if settings.SWEEPSTAKES_URL %}
                             <li><a href="{% url 'tracker:prizeindex' %}">{% trans "Prizes" %}</a></li>
-                        {% endif %}
+                            {% endif %}-->
                         <li><a href="{% url 'tracker:bidindex' %}">{% trans "Bids" %}</a></li>
-                        <li><a href="{% url 'tracker:milestoneindex' %}">{% trans "Milestones" %}</a></li>
+                        <!--<li><a href="{% url 'tracker:milestoneindex' %}">{% trans "Milestones" %}</a></li>
                         <li><a href="{% url 'tracker:donorindex' %}">{% trans "Donors" %}</a></li>
-                        <li><a href="{% url 'tracker:donationindex' %}">{% trans "Donations" %}</a></li>
+                        <li><a href="{% url 'tracker:donationindex' %}">{% trans "Donations" %}</a></li>-->
                     {% endif %}
-                    <li class="dropdown">
+                    <!--<li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events <span class="caret"></span></a>
                         <ul class="dropdown-menu small panel-max-height">
                             <li><a href="{% url 'tracker:index_all' %}">{% trans "All Events" %}</a></li>
@@ -73,10 +73,10 @@
                                 <li><a href="{% url 'tracker:index' event=ev.short %}">{{ ev.name }}</a></li>
                             {% endfor %}
                         </ul>
-                    </li>
+                    </li>-->
 
                     {% if user and user.is_authenticated %}
-                        <li><a href="{% url 'tracker:user_index' %}">{% trans "Self Service" %}</a></li>
+                    <!--<li><a href="{% url 'tracker:user_index' %}">{% trans "Self Service" %}</a></li>-->
                         <li><a href="{% url 'tracker:logout' %}">{% trans "Log Out" %}</a></li>
                     {% endif %}
                 </ul>
