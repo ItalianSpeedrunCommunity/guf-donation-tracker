@@ -162,14 +162,18 @@ function App() {
               <DropdownMenu name="Schedule Editor" path="schedule_editor" />
               &mdash;
               <DropdownMenu name="Interstitials" path="interstitials" />
-              {canChangeDonations && (
+              {canChangeDonations &&
+                (<>&mdash;
+                  <DropdownMenu name="Read Donations" path="read_donations" />
+                </>)
+                /*(
                 <>
                   &mdash;
                   <DropdownMenu name="Process Donations" path="process_donations" />
                   &mdash;
                   <DropdownMenu name="Read Donations" path="read_donations" />
                 </>
-              )}
+              )*/}
               {canSeeHiddenBids && (
                 <>
                   &mdash;
