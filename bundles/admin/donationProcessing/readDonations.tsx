@@ -31,27 +31,73 @@ export default React.memo(function ReadDonations() {
   const { ADMIN_ROOT } = useConstants();
   const { event: eventId } = useParams<{ event: string }>();
   const status = useSelector((state: any) => state.status);
+  const bids = useSelector((state: any) => state.models.bid);
+  const donationbids = useSelector((state: any) => state.models.donationbid);
   const donations = useSelector((state: any) => state.models.donation);
   const donors = useSelector((state: any) => state.models.donor);
   const event = useSelector((state: any) => state.models.event?.find((e: any) => e.pk === +eventId!));
   const dispatch = useDispatch();
   const canEditDonors = usePermission('tracker.change_donor');
-  const fetchDonations = useCallback(
+  const fetchBids = useCallback(
     (e?: React.MouseEvent<HTMLButtonElement>) => {
-      const params = {
-        all_comments: '',
+      const bidparams = {
         event: eventId,
-        feed: 'toread',
       };
-      dispatch(modelActions.loadModels('donation', params));
+
+      dispatch(modelActions.loadModels('bid', bidparams));
+
       e?.preventDefault();
     },
     [dispatch, eventId],
   );
+  const fetchDonationBids = useCallback(
+    (e?: React.MouseEvent<HTMLButtonElement>) => {
+      const donobidparams = {
+        event: eventId,
+      };
+
+      dispatch(modelActions.loadModels('donationbid', donobidparams));
+
+      e?.preventDefault();
+    },
+    [dispatch, eventId],
+  );
+  const fetchDonations = useCallback(
+    (e?: React.MouseEvent<HTMLButtonElement>) => {
+      const donoparams = {
+        all_comments: '',
+        event: eventId,
+        feed: 'toread',
+      };
+
+      dispatch(modelActions.loadModels('donation', donoparams));
+
+      e?.preventDefault();
+    },
+    [dispatch, eventId],
+  );
+
+  const fetchAll = useCallback(
+    (e?: React.MouseEvent<HTMLButtonElement>) => {
+      fetchBids();
+      fetchDonations();
+      fetchDonationBids();
+
+      e?.preventDefault();
+    },
+    [dispatch, eventId],
+  )
+
   useFetchDonors(eventId);
+  useEffect(() => {
+    fetchBids();
+  }, [fetchBids]);
   useEffect(() => {
     fetchDonations();
   }, [fetchDonations]);
+  useEffect(() => {
+    fetchDonationBids();
+  }, [fetchDonationBids]);
   const [donationState, dispatchState] = useReducer(stateReducer, {} as State);
   const action = useCachedCallback(
     ({
@@ -82,6 +128,23 @@ export default React.memo(function ReadDonations() {
     },
     [dispatch],
   );
+
+  const bidAction = useCachedCallback(
+    ({ pk, action, state }: { pk: number; action: Action; state: string }) => {
+      dispatchState({ pk, action });
+      dispatch(
+        modelActions.saveDraftModels([
+          {
+            pk: pk,
+            fields: { state },
+            type: 'bid',
+          },
+        ]),
+      );
+    },
+    [dispatch],
+  );
+
   const sortedDonations = useMemo(() => {
     return donations
       ? [...donations].sort((a: any, b: any) => {
@@ -99,15 +162,48 @@ export default React.memo(function ReadDonations() {
   return (
     <div>
       <h3>{event?.name}</h3>
-      <button onClick={fetchDonations}>Refresh</button>
+      <button onClick={fetchAll}>Refresh</button>
       <Spinner spinning={status.donation === 'loading'}>
         <table className="table table-condensed table-striped small">
           <tbody>
             {sortedDonations.map((donation: any) => {
               const donor = donors?.find((d: any) => d.pk === donation.donor);
               const donorLabel = donor?.alias ? `${donor.alias}#${donor.alias_num}` : '(Anonymous)';
+              const donobids = donationbids?.filter((donobid: any) => donobid.donation === donation.pk);
+              const donobidsView = donobids?.map((donobid: any) => {
+                const bidObj = bids?.find((bid: any) => bid.pk === donobid.bid);
+                return (
+                  <tr>
+                    <td>{bidObj?.name}</td>
+                    <td>&euro;{(+donobid?.amount).toFixed(2)}</td>
+                    <td></td>
+                    <td>
+                      <button
+                        onClick={bidAction({
+                          pk: bidObj.pk,
+                          action: 'accept',
+                          state: 'OPENED',
+                        })}
+                        disabled={bidObj._internal?.saving}>
+                        Accept
+                      </button>
+                      <button
+                        onClick={bidAction({
+                          pk: bidObj.pk,
+                          action: 'deny',
+                          state: 'DENIED',
+                        })}
+                        disabled={bidObj._internal?.saving}>
+                        Deny
+                      </button>
+                    </td>
+                    <td></td>
+                  </tr>
+                )
+              });
 
               return (
+                <>
                 <tr key={donation.pk}>
                   <td>
                     {canEditDonors ? <a href={`${ADMIN_ROOT}donor/${donation.donor}`}>{donorLabel}</a> : donorLabel}
@@ -163,6 +259,8 @@ export default React.memo(function ReadDonations() {
                     </Spinner>
                   </td>
                 </tr>
+                {donobidsView}
+                </>
               );
             })}
           </tbody>
